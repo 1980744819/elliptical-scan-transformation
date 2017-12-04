@@ -12,11 +12,13 @@ def create_img():
 
 if __name__=="__main__":
     im=create_img()
+    (x1,y1)=map(int,input("please input x and y: ").split(' '))
     (a,b)=map(int,input("please input a and b: ").split(' '))
     print(a,b)
     x=0
     y=b
     d1=b*b+a*a*(0.25-b)
+    im.putpixel((x1,y1),blk)
     while (b*b*(x+1))<(a*a*(y-0.5)):
         if d1<0:
             d1+=b*b*(2*x+3)
@@ -25,7 +27,10 @@ if __name__=="__main__":
             d1+=(b*b*(2*x+3))+a*a*(-2*y+2)
             x+=1
             y-=1
-        im.putpixel((x,y),blk)
+        im.putpixel((x+x1,y+y1),blk)
+        im.putpixel((x+x1, -y+y1), blk)
+        im.putpixel((-x+x1, -y+y1), blk)
+        im.putpixel((-x+x1, y+y1), blk)
     d2=math.sqrt(b*(x+0.5))+math.sqrt(a*(y-1))-math.sqrt(a*b)
     while y>0:
         if d2<0:
@@ -35,5 +40,8 @@ if __name__=="__main__":
         else:
             d2+=a*a*(-2*y+3)
             y-=1
-        im.putpixel((x,y),blk)
+        im.putpixel((x + x1, y + y1), blk)
+        im.putpixel((x + x1, -y + y1), blk)
+        im.putpixel((-x + x1, -y + y1), blk)
+        im.putpixel((-x + x1, y + y1), blk)
     im.show()
